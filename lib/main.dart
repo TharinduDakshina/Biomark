@@ -2,6 +2,7 @@ import 'package:biomark/providers/birthday_provider.dart';
 import 'package:biomark/providers/password_email_provider.dart';
 import 'package:biomark/providers/password_visibility_provider.dart';
 import 'package:biomark/providers/splash_screen_provider.dart';
+import 'package:biomark/screens/formScreen.dart';
 import 'package:biomark/screens/home_screen.dart';
 import 'package:biomark/screens/main_screen.dart';
 import 'package:biomark/screens/recovery_screen_1.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
       home: Consumer<SplashScreenProvider>(
         builder: (context, splashProvider, child) {
           return splashProvider.isSplashCompleted
-              ? const RecoveryScreen2()
+              ? const MainScreen()
               : const SplashScreen();
         },
       ),
@@ -57,7 +58,8 @@ class MyApp extends StatelessWidget {
         '/signupscreen': (context) => const SignUpScreen(),
         '/recoveryscreen1': (context) => const RecoveryScreen1(),
         '/recoveryscreen2': (context) => const RecoveryScreen2(),
-        '/homescreen': (context) => const HomeScreen()
+        '/homescreen': (context) => const HomeScreen(),
+        '/formscreen': (context) => const FormScreen(),
       },
 
     );
