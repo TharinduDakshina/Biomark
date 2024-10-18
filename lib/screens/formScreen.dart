@@ -185,12 +185,10 @@ class _FormScreenState extends State<FormScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black, // Background color
-                     // Text color
+                    foregroundColor: Colors.white, backgroundColor: Colors.black, // Text color
                     textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold, // Bold font weight
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white// Bold font weight
                     ),
                   ),
                   child: const Text('Submit'),
