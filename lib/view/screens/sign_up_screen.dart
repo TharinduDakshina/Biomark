@@ -1,6 +1,6 @@
-import 'package:biomark/providers/birthday_provider.dart';
-import 'package:biomark/providers/password_email_provider.dart';
-import 'package:biomark/widgets/sign_up_button.dart';
+import 'package:biomark/view/providers/birthday_provider.dart';
+import 'package:biomark/view/providers/password_email_provider.dart';
+import 'package:biomark/view/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/password_visibility_provider.dart';

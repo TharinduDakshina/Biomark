@@ -1,5 +1,5 @@
-import 'package:biomark/providers/password_visibility_provider.dart';
-import 'package:biomark/widgets/sign_in_button.dart';
+import 'package:biomark/view/providers/password_visibility_provider.dart';
+import 'package:biomark/view/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../theme/app_theme.dart';
