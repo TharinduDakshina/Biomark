@@ -162,7 +162,9 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/recoveryscreen1');
+                                  },
                                   child: Text(
                                     "Forgot Password?",
                                     style: TextStyle(
