@@ -6,6 +6,7 @@ import 'package:biomark/screens/main_screen.dart';
 import 'package:biomark/screens/sign_in_screen.dart';
 import 'package:biomark/screens/sign_up_screen.dart';
 import 'package:biomark/screens/splash_screen.dart';
+import 'package:biomark/screens/formScreen.dart';
 import 'package:biomark/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,7 +52,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/mainscreen': (context) => const MainScreen(),
         '/signinscreen': (context) => const SignInScreen(),
-        '/signupscreen': (context) => const SignUpScreen()
+        '/signupscreen': (context) => const SignUpScreen(),
+        '/formscreen': (context) => const FormScreen()
+
       },
 
     );
