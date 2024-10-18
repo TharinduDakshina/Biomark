@@ -1,5 +1,5 @@
 import 'package:biomark/providers/birthday_provider.dart';
-import 'package:biomark/providers/password_provider.dart';
+import 'package:biomark/providers/password_email_provider.dart';
 import 'package:biomark/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             width: screenWidth,
             decoration: BoxDecoration(color: AppTheme.colors.white),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
                 Row(
@@ -42,7 +43,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
@@ -133,7 +133,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hintStyle: TextStyle(
                                   color: AppTheme.colors.black.withOpacity(0.5),
                                   fontSize: 16,
-                                  
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -342,7 +341,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               textAlign: TextAlign.start,
-                              'Enter e-mail',
+                              'E-mail address',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -350,70 +349,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-                          TextFormField(
-                            validator: (value) {
-                              if (value!.isEmpty ||
-                                  !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                      .hasMatch(value)) {
-                                return "Enter a valid e-mail address";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                              hintText: 'e-mail',
-                              hintStyle: TextStyle(
-                                color: AppTheme.colors.primary.withOpacity(0.5),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                                borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
-                                  width: 1,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                                borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
-                                  width: 1,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              textAlign: TextAlign.start,
-                              'Password',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: AppTheme.colors.primary,
-                              ),
-                            ),
-                          ),
-                          Consumer<PasswordProvider>(builder: (context, passwordProvider, child){
-                          return Consumer<PasswordVisibilityProvider>(builder: (context, passwordVisibilityProvider, child){
+                          Consumer<PasswordEmailProvider>(
+                              builder: (context, passwordEmailProvider, child) {
                             return TextFormField(
-                              obscureText: passwordVisibilityProvider.visibility,
-                              onChanged: (value){
-                                passwordProvider.confirmPassword = value;
+                              onChanged: (value) {
+                                passwordEmailProvider.email = value;
                               },
                               decoration: InputDecoration(
-                                  hintText: 'Password',
-
+                                  hintText: 'e-mail',
                                   hintStyle: TextStyle(
-                                    color: AppTheme.colors.primary.withOpacity(0.5),
+                                    color: AppTheme.colors.primary
+                                        .withOpacity(0.5),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
@@ -436,18 +382,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       width: 1,
                                     ),
                                   ),
-                                  suffixIcon: IconButton(onPressed: (){
-                                    passwordVisibilityProvider.toggleVisibility();
-                                  }, icon: Icon(
-                                      passwordVisibilityProvider.visibility
-                                          ? Icons.visibility
-                                          : Icons.visibility_off
-                                  ))
-                              ),
+                                  errorText: passwordEmailProvider.emailError),
                             );
-                          });
                           }),
-
                           const SizedBox(
                             height: 10,
                           ),
@@ -455,7 +392,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               textAlign: TextAlign.start,
-                              'Confirm Password',
+                              'Password',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -463,17 +400,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ),
                           ),
-                          Consumer<PasswordProvider>(builder: (context, passwordProvider, child){
-                            return Consumer<PasswordVisibilityProvider>(builder: (context, passwordVisibilityProvider, child){
+                          Consumer<PasswordEmailProvider>(
+                              builder: (context, passwordEmailProvider, child) {
+                            return Consumer<PasswordVisibilityProvider>(builder:
+                                (context, passwordVisibilityProvider, child) {
                               return TextFormField(
-                                obscureText: passwordVisibilityProvider.visibility,
-                                onChanged: (value){
-                                  passwordProvider.password = value;
+                                obscureText:
+                                    passwordVisibilityProvider.visibility,
+                                onChanged: (value) {
+                                  passwordEmailProvider.password = value;
                                 },
                                 decoration: InputDecoration(
-                                    hintText: 'Confirm password',
+                                    hintText: 'Password',
                                     hintStyle: TextStyle(
-                                      color: AppTheme.colors.primary.withOpacity(0.5),
+                                      color: AppTheme.colors.primary
+                                          .withOpacity(0.5),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
@@ -489,6 +430,72 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         width: 1,
                                       ),
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.colors.black,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                        onPressed: () {
+                                          passwordVisibilityProvider
+                                              .toggleVisibility();
+                                        },
+                                        icon: Icon(passwordVisibilityProvider
+                                                .visibility
+                                            ? Icons.visibility
+                                            : Icons.visibility_off)),
+                                    errorText:
+                                        passwordEmailProvider.lengthError),
+                              );
+                            });
+                          }),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              textAlign: TextAlign.start,
+                              'Confirm Password',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppTheme.colors.primary,
+                              ),
+                            ),
+                          ),
+                          Consumer<PasswordEmailProvider>(
+                              builder: (context, passwordEmailProvider, child) {
+                            return Consumer<PasswordVisibilityProvider>(builder:
+                                (context, passwordVisibilityProvider, child) {
+                              return TextFormField(
+                                obscureText:
+                                    passwordVisibilityProvider.visibility,
+                                onChanged: (value) {
+                                  passwordEmailProvider.confirmPassword = value;
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Confirm password',
+                                  hintStyle: TextStyle(
+                                    color: AppTheme.colors.primary
+                                        .withOpacity(0.5),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: AppTheme.colors.light,
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide(
+                                      color: AppTheme.colors.black,
+                                      width: 1,
+                                    ),
+                                  ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     borderSide: BorderSide(
@@ -496,14 +503,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       width: 1,
                                     ),
                                   ),
-                                    suffixIcon: IconButton(onPressed: (){
-                                      passwordVisibilityProvider.toggleVisibility();
-                                    }, icon: Icon(
-                                        passwordVisibilityProvider.visibility
-                                            ? Icons.visibility
-                                            : Icons.visibility_off
-                                    )),
-                                  errorText: passwordProvider.errorMessage,
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        passwordVisibilityProvider
+                                            .toggleVisibility();
+                                      },
+                                      icon: Icon(
+                                          passwordVisibilityProvider.visibility
+                                              ? Icons.visibility
+                                              : Icons.visibility_off)),
+                                  errorText: passwordEmailProvider.errorMessage,
                                 ),
                               );
                             });
@@ -511,7 +520,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          SignUpButton(routePath: '/',),
+                          SignUpButton(
+                            routePath: '/',
+                          ),
                           const SizedBox(
                             height: 5,
                           ),
@@ -522,11 +533,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               children: [
                                 Text(
                                   "Already have an account? ",
-                                  style: TextStyle(color: AppTheme.colors.primary),
+                                  style:
+                                      TextStyle(color: AppTheme.colors.primary),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
-                                    Navigator.pushNamed(context, '/signinscreen');
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/signinscreen');
                                   },
                                   child: Text(
                                     "Sign In",
