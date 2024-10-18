@@ -2,6 +2,7 @@ import 'package:biomark/view/providers/birthday_provider.dart';
 import 'package:biomark/view/providers/password_email_provider.dart';
 import 'package:biomark/view/providers/password_visibility_provider.dart';
 import 'package:biomark/view/providers/splash_screen_provider.dart';
+import 'package:biomark/view/providers/web_view_provider.dart';
 import 'package:biomark/view/screens/formScreen.dart';
 import 'package:biomark/view/screens/home_screen.dart';
 import 'package:biomark/view/screens/main_screen.dart';
@@ -29,7 +30,8 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
       ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
       ChangeNotifierProvider(create: (_) => BirthdayProvider()),
-      ChangeNotifierProvider(create: (_) => PasswordEmailProvider())
+      ChangeNotifierProvider(create: (_) => PasswordEmailProvider()),
+      ChangeNotifierProvider(create: (_) => WebViewProvider())
     ],
 
     child: const MyApp(),

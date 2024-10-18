@@ -27,16 +27,19 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/biomark_logo_black.png',
-                  alignment: Alignment.center,
-                  width: 250,
-                  height: 250,
+                Center(
+                  child: SizedBox(
+                    height: 80,
+                    child: Image.asset(
+                      'assets/images/biomark_logo_black.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                 ),
                 Text(
                   "Welcome Back",
                   style: TextStyle(
-                      color: AppTheme.colors.black,
+                      color: AppTheme.colors.primary,
                       fontSize: 36,
                       fontWeight: FontWeight.bold),
                 ),
@@ -81,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -127,7 +130,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.light,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
@@ -150,7 +153,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                   }, icon: Icon(
                                       passwordVisibilityProvider.visibility
                                           ? Icons.visibility
-                                          : Icons.visibility_off
+                                          : Icons.visibility_off,
+                                    color: AppTheme.colors.primary.withOpacity(0.5),
                                   ))
                               ),
                             );
@@ -178,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           SignInButton(
                               routePath: '/homescreen',
-                              buttonColor: AppTheme.colors.black,
+                              buttonColor: AppTheme.colors.primary,
                               textColor: AppTheme.colors.secondary),
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0),
@@ -197,7 +201,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     "Sign Up",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: AppTheme.colors.black),
+                                        color: AppTheme.colors.primary),
                                   ),
                                 )
                               ],
