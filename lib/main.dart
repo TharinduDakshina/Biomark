@@ -1,17 +1,16 @@
-import 'package:biomark/providers/birthday_provider.dart';
-import 'package:biomark/providers/password_email_provider.dart';
-import 'package:biomark/providers/password_visibility_provider.dart';
-import 'package:biomark/providers/splash_screen_provider.dart';
-import 'package:biomark/screens/formScreen.dart';
-import 'package:biomark/screens/home_screen.dart';
-import 'package:biomark/screens/main_screen.dart';
-import 'package:biomark/screens/recovery_screen_1.dart';
-import 'package:biomark/screens/recovery_screen_2.dart';
-import 'package:biomark/screens/sign_in_screen.dart';
-import 'package:biomark/screens/sign_up_screen.dart';
-import 'package:biomark/screens/splash_screen.dart';
+import 'package:biomark/view/providers/birthday_provider.dart';
+import 'package:biomark/view/providers/password_email_provider.dart';
+import 'package:biomark/view/providers/password_visibility_provider.dart';
+import 'package:biomark/view/providers/splash_screen_provider.dart';
+import 'package:biomark/view/screens/formScreen.dart';
+import 'package:biomark/view/screens/home_screen.dart';
+import 'package:biomark/view/screens/main_screen.dart';
+import 'package:biomark/view/screens/recovery_screen_1.dart';
+import 'package:biomark/view/screens/recovery_screen_2.dart';
+import 'package:biomark/view/screens/sign_in_screen.dart';
+import 'package:biomark/view/screens/sign_up_screen.dart';
+import 'package:biomark/view/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:biomark/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +19,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
 
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -73,3 +73,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:biomark/theme/app_theme.dart';
+import 'package:biomark/view/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/splash_screen_provider.dart';
