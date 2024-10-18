@@ -1,3 +1,4 @@
+import 'package:biomark/controller/formController.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:biomark/view/providers/birthday_provider.dart';
@@ -183,7 +184,9 @@ class _FormScreenState extends State<FormScreen> {
                           _heightError == null &&
                           _ethnicityError == null &&
                           _eyeColourError == null) {
-                        submitData();
+                         submitData();
+                      }else {
+                        // submitData();
                       }
                     }
                   },
@@ -246,6 +249,19 @@ class _FormScreenState extends State<FormScreen> {
 
   void submitData() {
     if (kDebugMode) {
+
+       saveUserData(
+          _dobController.text.trim(),
+          _timeOfBirthController.text.trim(),
+          _locationOfBirthController.text.trim(),
+          _bloodGroupController.text.trim(),
+          _sexController.text.trim(),
+          _heightController.text.trim(),
+          _ethnicityController.text.trim(),
+          _eyeColourController.text.trim()
+      );
+
+
       print('Date of Birth: ${_dobController.text.trim()}');
       print('Time of Birth: ${_timeOfBirthController.text.trim()}');
       print('Location of Birth: ${_locationOfBirthController.text.trim()}');
