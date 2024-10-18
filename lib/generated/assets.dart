@@ -2,7 +2,9 @@
 class Assets {
   Assets._();
 
+  static const String iconsQuestionMark = 'assets/icons/question-mark.svg';
   static const String imagesBiomarkLogo = 'assets/images/biomark_logo.png';
   static const String imagesBiomarkLogoBlack = 'assets/images/biomark_logo_black.png';
+  static const String imagesBiomarkName = 'assets/images/biomark_name.png';
 
 }

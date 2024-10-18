@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:biomark/providers/birthday_provider.dart';
-import '../theme/app_theme.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -300,7 +299,7 @@ class _FormScreenState extends State<FormScreen> {
         if(value.isNotEmpty && heightPattern.hasMatch(value)){
           _heightError=null;
         }else{
-          _heightError = '(E.G., 170cm, 180cm, 5\'10\",4\'10\")';
+          _heightError = '(E.G., 170cm, 180cm, 5\'10",4\'10")';
         }
         break;
       case '_ethnicityController':

@@ -2,6 +2,7 @@ import 'package:biomark/providers/birthday_provider.dart';
 import 'package:biomark/providers/password_email_provider.dart';
 import 'package:biomark/providers/password_visibility_provider.dart';
 import 'package:biomark/providers/splash_screen_provider.dart';
+import 'package:biomark/providers/web_view_provider.dart';
 import 'package:biomark/screens/formScreen.dart';
 import 'package:biomark/screens/home_screen.dart';
 import 'package:biomark/screens/main_screen.dart';
@@ -15,13 +16,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+
 void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
       ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
       ChangeNotifierProvider(create: (_) => BirthdayProvider()),
-      ChangeNotifierProvider(create: (_) => PasswordEmailProvider())
+      ChangeNotifierProvider(create: (_) => PasswordEmailProvider()),
+      ChangeNotifierProvider(create: (_) => WebViewProvider())
     ],
 
     child: const MyApp(),

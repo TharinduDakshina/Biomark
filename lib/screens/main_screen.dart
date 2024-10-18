@@ -38,7 +38,7 @@ class MainScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SignInButton(routePath: '/signinscreen', buttonColor: AppTheme.colors.secondary, textColor: AppTheme.colors.black,)
+                  SignInButton(routePath: '/signinscreen', buttonColor: AppTheme.colors.secondary, textColor: AppTheme.colors.primary,)
                 ],
               ),
             ),
