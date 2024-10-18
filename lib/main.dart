@@ -11,13 +11,20 @@ import 'package:biomark/screens/recovery_screen_2.dart';
 import 'package:biomark/screens/sign_in_screen.dart';
 import 'package:biomark/screens/sign_up_screen.dart';
 import 'package:biomark/screens/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 // import 'package:biomark/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
