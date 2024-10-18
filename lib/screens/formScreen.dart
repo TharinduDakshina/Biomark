@@ -185,10 +185,11 @@ class _FormScreenState extends State<FormScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black, // Background color
-                    onPrimary: Colors.white, // Text color
-                    fontSize: 16,
+                    backgroundColor: Colors.black, // Background color
+                     // Text color
                     textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold, // Bold font weight
                     ),
                   ),

@@ -162,9 +162,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/recoveryscreen1');
+                                  },
                                   child: Text(
-                                    "Forgot Password?",
+                                    "Lost account?",
                                     style: TextStyle(
                                       color: AppTheme.colors.primary,
                                       fontSize: 14,
@@ -175,7 +177,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           SignInButton(
-                              routePath: 'homescreen',
+                              routePath: '/homescreen',
                               buttonColor: AppTheme.colors.black,
                               textColor: AppTheme.colors.secondary),
                           Padding(
