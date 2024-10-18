@@ -2,8 +2,9 @@ import 'package:biomark/providers/birthday_provider.dart';
 import 'package:biomark/providers/password_email_provider.dart';
 import 'package:biomark/providers/password_visibility_provider.dart';
 import 'package:biomark/providers/splash_screen_provider.dart';
+import 'package:biomark/providers/volunteer_provider.dart';
 import 'package:biomark/providers/web_view_provider.dart';
-import 'package:biomark/screens/formScreen.dart';
+import 'package:biomark/screens/form_screen.dart';
 import 'package:biomark/screens/home_screen.dart';
 import 'package:biomark/screens/main_screen.dart';
 import 'package:biomark/screens/recovery_screen_1.dart';
@@ -16,22 +17,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,);
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => SplashScreenProvider()),
       ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
       ChangeNotifierProvider(create: (_) => BirthdayProvider()),
       ChangeNotifierProvider(create: (_) => PasswordEmailProvider()),
-      ChangeNotifierProvider(create: (_) => WebViewProvider())
+      ChangeNotifierProvider(create: (_) => WebViewProvider()),
+      ChangeNotifierProvider(create: (_) => VolunteerProvider())
     ],
 
     child: const MyApp(),

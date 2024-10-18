@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 class SignInButton extends StatelessWidget {
-  final String routePath;
+  // final String routePath;
+  final VoidCallback onPressed;
   final Color textColor, buttonColor;
-  const SignInButton({super.key, required this.routePath, required this.buttonColor, required this.textColor});
+  const SignInButton({super.key, required this.onPressed, required this.buttonColor, required this.textColor});
 
 
 
   @override
   Widget build(BuildContext context){
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, routePath);
+        onPressed();
       },
       child: Container(
         alignment: Alignment.center,
