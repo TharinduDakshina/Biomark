@@ -1,7 +1,6 @@
 import 'package:biomark/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/birthday_provider.dart';
 import '../providers/password_email_provider.dart';
 import '../providers/password_visibility_provider.dart';
 import '../theme/app_theme.dart';
@@ -31,7 +30,7 @@ class RecoveryScreen2 extends StatelessWidget {
                       Text(
                         "Reset Password",
                         style: TextStyle(
-                            color: AppTheme.colors.black,
+                            color: AppTheme.colors.primary,
                             fontSize: 28,
                             fontWeight: FontWeight.bold),
                       ),
@@ -45,7 +44,10 @@ class RecoveryScreen2 extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Text("Create a new password."),
+                          child: Text("Create a new password.",
+                          style: TextStyle(
+                            color: AppTheme.colors.primary
+                          ),),
                         )
                       ],
                     ),
@@ -97,14 +99,14 @@ class RecoveryScreen2 extends StatelessWidget {
                                           focusedBorder: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(12.0),
                                             borderSide: BorderSide(
-                                              color: AppTheme.colors.black,
+                                              color: AppTheme.colors.primary,
                                               width: 1,
                                             ),
                                           ),
                                           border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(10.0),
                                             borderSide: BorderSide(
-                                              color: AppTheme.colors.black,
+                                              color: AppTheme.colors.primary,
                                               width: 1,
                                             ),
                                           ),
@@ -116,7 +118,8 @@ class RecoveryScreen2 extends StatelessWidget {
                                               icon: Icon(passwordVisibilityProvider
                                                   .visibility
                                                   ? Icons.visibility
-                                                  : Icons.visibility_off)),
+                                                  : Icons.visibility_off),
+                                              color: AppTheme.colors.primary.withOpacity(0.5)),
                                           errorText:
                                           passwordEmailProvider.lengthError),
                                     );
@@ -163,14 +166,14 @@ class RecoveryScreen2 extends StatelessWidget {
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(12.0),
                                           borderSide: BorderSide(
-                                            color: AppTheme.colors.black,
+                                            color: AppTheme.colors.primary,
                                             width: 1,
                                           ),
                                         ),
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(10.0),
                                           borderSide: BorderSide(
-                                            color: AppTheme.colors.black,
+                                            color: AppTheme.colors.primary,
                                             width: 1,
                                           ),
                                         ),
@@ -182,7 +185,9 @@ class RecoveryScreen2 extends StatelessWidget {
                                             icon: Icon(
                                                 passwordVisibilityProvider.visibility
                                                     ? Icons.visibility
-                                                    : Icons.visibility_off)),
+                                                    : Icons.visibility_off,
+                                                color: AppTheme.colors.primary.withOpacity(0.5)
+                                            )),
                                         errorText: passwordEmailProvider.errorMessage,
                                       ),
                                     );
@@ -191,7 +196,7 @@ class RecoveryScreen2 extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            SignInButton(routePath: '/homescreen', buttonColor: AppTheme.colors.black, textColor: AppTheme.colors.secondary)
+                            SignInButton(routePath: '/homescreen', buttonColor: AppTheme.colors.primary, textColor: AppTheme.colors.secondary)
                           ],
                         ),
                       ),

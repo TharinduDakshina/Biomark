@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SignInButton extends StatelessWidget {
+class SubmitButton extends StatelessWidget {
   final String routePath;
   final Color textColor, buttonColor;
-  const SignInButton({super.key, required this.routePath, required this.buttonColor, required this.textColor});
+  const SubmitButton({super.key, required this.routePath, required this.buttonColor, required this.textColor});
 
 
 
@@ -24,7 +24,7 @@ class SignInButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12)
         ),
         child: Text(
-          "Sign In",
+          "Submit",
           style: TextStyle(
               color: textColor,
               fontWeight: FontWeight.bold,

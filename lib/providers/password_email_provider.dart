@@ -14,7 +14,7 @@ class PasswordEmailProvider extends ChangeNotifier {
   String? get emailError => _emailError;
 
   set email(String value) {
-    if (value!.isEmpty ||
+    if (value.isEmpty ||
         !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
       _emailError = "Please enter a valid e-mail";
     }else{

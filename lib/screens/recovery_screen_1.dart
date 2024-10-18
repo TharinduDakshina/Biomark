@@ -1,3 +1,4 @@
+import 'package:biomark/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/birthday_provider.dart';
@@ -247,6 +248,10 @@ class RecoveryScreen1 extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SubmitButton(routePath: '/recoveryscreen2', buttonColor: AppTheme.colors.primary, textColor: AppTheme.colors.secondary)
                       ],
                     ),
                   ),

@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Text(
                       "Welcome to Biomark",
                       style: TextStyle(
-                          color: AppTheme.colors.black,
+                          color: AppTheme.colors.primary,
                           fontSize: 28,
                           fontWeight: FontWeight.bold),
                     ),
@@ -69,7 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           TextFormField(
                             style: TextStyle(
-                                color: AppTheme.colors.black,
+                                color: AppTheme.colors.primary,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500),
                             decoration: InputDecoration(
@@ -80,21 +80,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -123,35 +123,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _selectedDate(context, birthdayProvider);
                               },
                               style: TextStyle(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w100),
                               decoration: InputDecoration(
                                 suffixIcon:
-                                    const Icon(Icons.calendar_month_sharp),
+                                Icon(Icons.calendar_month_sharp,
+                                      color:AppTheme.colors.primary.withOpacity(0.5),
+                                    ),
                                 hintText: birthdayProvider.getFormattedDate(),
                                 hintStyle: TextStyle(
-                                  color: AppTheme.colors.black.withOpacity(0.5),
+                                  color: AppTheme.colors.primary.withOpacity(0.5),
                                   fontSize: 16,
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                   borderSide: BorderSide(
-                                    color: AppTheme.colors.light,
+                                    color: AppTheme.colors.primary,
                                     width: 1,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                   borderSide: BorderSide(
-                                    color: AppTheme.colors.black,
+                                    color: AppTheme.colors.primary,
                                     width: 1,
                                   ),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(
-                                    color: AppTheme.colors.black,
+                                    color: AppTheme.colors.primary,
                                     width: 1,
                                   ),
                                 ),
@@ -182,21 +184,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -226,21 +228,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -270,21 +272,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -314,21 +316,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.light,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                                 borderSide: BorderSide(
-                                  color: AppTheme.colors.black,
+                                  color: AppTheme.colors.primary,
                                   width: 1,
                                 ),
                               ),
@@ -364,21 +366,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.light,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.black,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.black,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
@@ -419,21 +421,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
                                       borderSide: BorderSide(
-                                        color: AppTheme.colors.light,
+                                        color: AppTheme.colors.primary,
                                         width: 1,
                                       ),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12.0),
                                       borderSide: BorderSide(
-                                        color: AppTheme.colors.black,
+                                        color: AppTheme.colors.primary,
                                         width: 1,
                                       ),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                       borderSide: BorderSide(
-                                        color: AppTheme.colors.black,
+                                        color: AppTheme.colors.primary,
                                         width: 1,
                                       ),
                                     ),
@@ -445,7 +447,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         icon: Icon(passwordVisibilityProvider
                                                 .visibility
                                             ? Icons.visibility
-                                            : Icons.visibility_off)),
+                                            : Icons.visibility_off),
+                                    color: AppTheme.colors.primary.withOpacity(0.5),),
                                     errorText:
                                         passwordEmailProvider.lengthError),
                               );
@@ -485,21 +488,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.light,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.black,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                     borderSide: BorderSide(
-                                      color: AppTheme.colors.black,
+                                      color: AppTheme.colors.primary,
                                       width: 1,
                                     ),
                                   ),
@@ -511,7 +514,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       icon: Icon(
                                           passwordVisibilityProvider.visibility
                                               ? Icons.visibility
-                                              : Icons.visibility_off)),
+                                              : Icons.visibility_off),
+                                      color: AppTheme.colors.primary.withOpacity(0.5)),
                                   errorText: passwordEmailProvider.errorMessage,
                                 ),
                               );
@@ -545,7 +549,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     "Sign In",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: AppTheme.colors.black),
+                                        color: AppTheme.colors.primary),
                                   ),
                                 )
                               ],
