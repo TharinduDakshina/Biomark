@@ -1,7 +1,5 @@
 import 'package:biomark/providers/password_visibility_provider.dart';
 import 'package:biomark/widgets/sign_in_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../auth/auth_service.dart';
