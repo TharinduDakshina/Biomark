@@ -32,9 +32,13 @@ class _FormScreenState extends State<FormScreen> {
   String? _eyeColourError;
   User? _user;
   late bool isDataSaved;
-  Map<String, dynamic>? userData;
+  var userData;
+  String buttonName="Submit";
+  late String state;
+  late BuildContext context2;
 
   final _formKey = GlobalKey<FormState>();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   final TextEditingController _dobController = TextEditingController();
   final TextEditingController _timeOfBirthController = TextEditingController();
@@ -56,52 +60,36 @@ class _FormScreenState extends State<FormScreen> {
     _user = FirebaseAuth.instance.currentUser;
     if (_user != null) {
       String? userId = _user?.uid;
+       await firestore
+          .collection("userInfo")
+           .where("userId", isEqualTo: userId)
+           .get().then((value) {
 
-
-       await FirebaseFirestore.instance
-          .collection("userInfo").doc(userId).get().then((value) {
-        // login user data collect
-         showToast('${value}');
-         final data = value.data() as Map<String, dynamic>;
+         userData = value.docs.first.data();
+         isDataSaved = value.docs.first.exists;
 
       });
 
-      //  var exists = userDoc.data().toString();
-      // isDataSaved = userDoc.exists;
-      //
-      // showToast('${userDoc.exists}');
-      //
-      // showToast('${userDoc}');
-      // print("========================================================================================= ${userDoc}");
 
-      // if(isDataSaved){
-      //   showToast('Data has in database.');
-      //   setState(() {
-      //     userData = userDoc.data() as Map<String, dynamic>?;
-      //     _dobController.text = userData != null && userData!.containsKey('dateOfBirth') ? userData!['dateOfBirth'] : '';
-      //     _timeOfBirthController.text=userData!['timeOfBirth'] ?? '';
-      //     _locationOfBirthController.text=userData!['locationOfBirth'] ?? '';
-      //     _bloodGroupController.text=userData!['bloodGroup'] ?? '';
-      //     _sexController.text=userData!['sex'] ?? '';
-      //     _heightController.text=userData!['height'] ?? '';
-      //     _ethnicityController.text=userData!['ethnicity'] ?? '';
-      //     _eyeColourController.text=userData!['eyeColour'] ?? '';
-      //
-      //     print("=========================================================================================");
-      //
-      //     print('Date of Birth: ${userData != null && userData!.containsKey('dateOfBirth') ? userData!['dateOfBirth'] : ''}');
-      //     print('Time of Birth: ${userData!['timeOfBirth'] ?? ''}');
-      //     print('Location of Birth: ${userData!['locationOfBirth'] ?? ''}');
-      //     print('Blood Group: ${userData!['bloodGroup'] ?? ''}');
-      //     print('Sex: ${userData!['sex'] ?? ''}');
-      //     print('Height: ${userData!['height'] ?? ''}');
-      //     print('Ethnicity: ${userData!['ethnicity'] ?? ''}');
-      //     print('Eye Colour: ${userData!['eyeColour'] ?? ''}');
-      //   });
-      // }else{
-      //   showToast('User id ${userId}');
-      //   showToast('${exists}');
-      // }
+
+      if(isDataSaved){
+        setState(() {
+          state=userData['state'];
+          if(state!="Unsubscribe"){
+            buttonName="UnSubscribe";
+            _dobController.text = userData['dateOfBirth'] ?? '';
+            _timeOfBirthController.text=userData['timeOfBirth'] ?? '';
+            _locationOfBirthController.text=userData['locationOfBirth'] ?? '';
+            _bloodGroupController.text=userData['bloodGroup'] ?? '';
+            _sexController.text=userData['sex'] ?? '';
+            _heightController.text=userData['height'] ?? '';
+            _ethnicityController.text=userData['ethnicity'] ?? '';
+            _eyeColourController.text=userData['eyeColour'] ?? '';
+          }
+        });
+      }else{
+       // showToast('User id ${userId}');
+      }
     } else {
       setState(() {
         isDataSaved = false;
@@ -110,11 +98,9 @@ class _FormScreenState extends State<FormScreen> {
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
+    context2=context;
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
@@ -307,25 +293,61 @@ class _FormScreenState extends State<FormScreen> {
                                 ),
                                 const SizedBox(height: 8),
                                 ElevatedButton(
-                                  onPressed: () {
+                                  onPressed: () async {
+                                   if(isDataSaved && state!="Unsubscribe"){
+                                      try{
+                                        Map<String, String?> newData() {
+                                          return {
+                                            'userId':_user?.uid,
+                                            'dateOfBirth': _dobController.text.trim(),
+                                            'timeOfBirth': _timeOfBirthController.text.trim(),
+                                            'locationOfBirth': _locationOfBirthController.text.trim(),
+                                            'bloodGroup': _bloodGroupController.text.trim(),
+                                            'sex': _sexController.text.trim(),
+                                            'height': _heightController.text.trim(),
+                                            'ethnicity': _ethnicityController.text.trim(),
+                                            'eyeColour': _eyeColourController.text.trim(),
+                                            'state': "Unsubscribe",
+                                          };
+                                        }
 
-                                    if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        provider.validateFields();
-                                      });
+                                        QuerySnapshot querySnapshot = await firestore.collection('userInfo')
+                                            .where("userId", isEqualTo: _user?.uid)
+                                            .get();
 
-                                      if (provider.dobError == null &&
-                                          provider.timeOfBirthError == null &&
-                                          provider.locationOfBirthError == null &&
-                                          provider.bloodGroupError == null &&
-                                          provider.sexError == null &&
-                                          provider.heightError == null &&
-                                          provider.ethnicityError == null &&
-                                          provider.eyeColourError == null) {
-                                      }else{
-                                        submitData(provider);
+                                        for (var doc in querySnapshot.docs) {
+                                          await firestore.collection('userInfo')
+                                              .doc(doc.id)
+                                              .update(newData());
+                                        }
+                                        showToast('Unsubscribed.');
+                                        Navigator.pop(context);
+                                        // methanin back wenna danna
+                                      }catch(e){
+                                        showToast('$e');
                                       }
-                                    }
+
+                                   }else{
+                                     if (_formKey.currentState!.validate()) {
+                                       setState(() {
+                                         provider.validateFields();
+                                       });
+
+                                       if (provider.dobError == null &&
+                                           provider.timeOfBirthError == null &&
+                                           provider.locationOfBirthError == null &&
+                                           provider.bloodGroupError == null &&
+                                           provider.sexError == null &&
+                                           provider.heightError == null &&
+                                           provider.ethnicityError == null &&
+                                           provider.eyeColourError == null) {
+                                       }else{
+                                         submitData(provider);
+                                       }
+                                     }
+                                   }
+
+
                                   },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 0,
@@ -335,7 +357,7 @@ class _FormScreenState extends State<FormScreen> {
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
                                   ),
-                                  child: const Text('Submit'),
+                                  child: Text(buttonName),
                                 ),
                               ],
                             ),
@@ -407,7 +429,9 @@ class _FormScreenState extends State<FormScreen> {
           _heightController.text.trim(),
           _ethnicityController.text.trim(),
           _eyeColourController.text.trim(),
-          _user!.uid
+          _user!.uid,
+          state,
+          context2
       );
     }
   }
@@ -476,3 +500,4 @@ class _FormScreenState extends State<FormScreen> {
 
 
 }
+
