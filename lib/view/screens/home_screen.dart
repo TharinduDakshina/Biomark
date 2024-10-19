@@ -4,6 +4,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../../auth/auth_service.dart';
 import '../providers/web_view_provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,13 +30,93 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SpeedDialChild(
                     child: Icon(
+                      Icons.logout_rounded,
+                      color: AppTheme.colors.red,
+                    ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: AppTheme.colors.primary,
+                            iconColor: AppTheme.colors.white,
+                            elevation: 0,
+                            title: Text(
+                              'Sign Out?',
+                              style: TextStyle(
+                                color: AppTheme.colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            shadowColor: AppTheme.colors.black,
+                            surfaceTintColor: AppTheme.colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            actions: [
+                              SizedBox(
+                                width: 92,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // Close the dialog
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    side: BorderSide(
+                                        color: AppTheme.colors.primary,
+                                        width: 1.5),
+                                    elevation: 0,
+                                    foregroundColor: AppTheme.colors.primary,
+                                    backgroundColor: AppTheme.colors.secondary,
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  child: const Text('No'),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 92,
+                                child: ElevatedButton(
+                                  onPressed: () async {
+                                    await AuthService().signOut();
+                                    Navigator.pushReplacementNamed(
+                                        context, '/signinscreen');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    side: BorderSide(
+                                        color: AppTheme.colors.white,
+                                        width: 1.5),
+                                    elevation: 0,
+                                    foregroundColor: AppTheme.colors.secondary,
+                                    backgroundColor: AppTheme.colors.secondary,
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppTheme.colors.red
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Yes',
+                                    style: TextStyle(
+                                      color: AppTheme.colors.red, // Set the "Yes" text color to white
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  SpeedDialChild(
+                    child: Icon(
                       Icons.handshake_outlined,
                       color: AppTheme.colors.primary,
                     ),
                     onTap: () {
-                     Navigator.pushNamed(context, '/formscreen');
+                      Navigator.pushNamed(context, '/formscreen');
                     },
-
                   ),
                   SpeedDialChild(
                     child: Icon(
@@ -43,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                       color: AppTheme.colors.primary,
                     ),
                     onTap: () {
-                      // Add your favorite functionality here
+                      Navigator.pushNamed(context, '/securityscreen');
                     },
                   ),
                   SpeedDialChild(
@@ -52,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                       color: AppTheme.colors.primary,
                     ),
                     onTap: () {
-                      // Add your settings functionality here
+                      Navigator.pushNamed(context, '/personalscreen');
                     },
                   ),
                 ],

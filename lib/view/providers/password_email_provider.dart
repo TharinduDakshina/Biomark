@@ -6,18 +6,21 @@ class PasswordEmailProvider extends ChangeNotifier {
   String? _errorMessage;
   String? _lengthError;
   String? _emailError;
-
+  String? _userEmail;
   String get password => _password;
   String get confirmPassword => _confirmPassword;
   String? get errorMessage => _errorMessage;
   String? get lengthError => _lengthError;
   String? get emailError => _emailError;
 
+  String? get userEmail => _userEmail;
+
   set email(String value) {
     if (value.isEmpty ||
         !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
       _emailError = "Please enter a valid e-mail";
     }else{
+      _userEmail = value;
       _emailError = null;
     }
     notifyListeners();

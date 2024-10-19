@@ -17,6 +17,7 @@ class AuthService {
         password: password.trim(),
       );
       return AuthResponse(userCredential: userCredential);
+
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       if (e.code == 'user-not-found') {
@@ -30,6 +31,26 @@ class AuthService {
     }
   }
 
+  Future<AuthResponse> registerWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
+      return AuthResponse(userCredential: userCredential);
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      if (e.code == 'weak-password') {
+        errorMessage = 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        errorMessage = 'The account already exists for that email.';
+      } else {
+        errorMessage = 'Registration failed. Please try again.';
+      }
+      return AuthResponse(errorMessage: errorMessage);
+    }
+  }
+
   Future<void> signOut() async {
     await _auth.signOut();
   }
@@ -37,4 +58,6 @@ class AuthService {
   User? getCurrentUser() {
     return _auth.currentUser;
   }
+
+  Stream<User?> get authStateChanges => _auth.authStateChanges();
 }

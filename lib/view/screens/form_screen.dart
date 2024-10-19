@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -60,13 +59,13 @@ class _FormScreenState extends State<FormScreen> {
     _user = FirebaseAuth.instance.currentUser;
     if (_user != null) {
       String? userId = _user?.uid;
-       await firestore
+      await firestore
           .collection("userInfo")
-           .where("userId", isEqualTo: userId)
-           .get().then((value) {
+          .where("userId", isEqualTo: userId)
+          .get().then((value) {
 
-         userData = value.docs.first.data();
-         isDataSaved = value.docs.first.exists;
+        userData = value.docs.first.data();
+        isDataSaved = value.docs.first.exists;
 
       });
 
@@ -88,7 +87,7 @@ class _FormScreenState extends State<FormScreen> {
           }
         });
       }else{
-       // showToast('User id ${userId}');
+        // showToast('User id ${userId}');
       }
     } else {
       setState(() {
@@ -280,21 +279,21 @@ class _FormScreenState extends State<FormScreen> {
                                     ),
                                     Expanded(
                                         child: Container(
-                                      alignment: Alignment.topCenter,
-                                      height: 40,
-                                      child: Text(
-                                        "You can unsubscribe from this service any anytime. ",
-                                        style: TextStyle(
-                                            color: AppTheme.colors.red
-                                                .withOpacity(0.7)),
-                                      ),
-                                    ))
+                                          alignment: Alignment.topCenter,
+                                          height: 40,
+                                          child: Text(
+                                            "You can unsubscribe from this service any anytime. ",
+                                            style: TextStyle(
+                                                color: AppTheme.colors.red
+                                                    .withOpacity(0.7)),
+                                          ),
+                                        ))
                                   ],
                                 ),
                                 const SizedBox(height: 8),
                                 ElevatedButton(
                                   onPressed: () async {
-                                   if(isDataSaved && state!="Unsubscribe"){
+                                    if(isDataSaved && state!="Unsubscribe"){
                                       try{
                                         Map<String, String?> newData() {
                                           return {
@@ -327,25 +326,25 @@ class _FormScreenState extends State<FormScreen> {
                                         showToast('$e');
                                       }
 
-                                   }else{
-                                     if (_formKey.currentState!.validate()) {
-                                       setState(() {
-                                         provider.validateFields();
-                                       });
+                                    }else{
+                                      if (_formKey.currentState!.validate()) {
+                                        setState(() {
+                                          provider.validateFields();
+                                        });
 
-                                       if (provider.dobError == null &&
-                                           provider.timeOfBirthError == null &&
-                                           provider.locationOfBirthError == null &&
-                                           provider.bloodGroupError == null &&
-                                           provider.sexError == null &&
-                                           provider.heightError == null &&
-                                           provider.ethnicityError == null &&
-                                           provider.eyeColourError == null) {
-                                       }else{
-                                         submitData(provider);
-                                       }
-                                     }
-                                   }
+                                        if (provider.dobError == null &&
+                                            provider.timeOfBirthError == null &&
+                                            provider.locationOfBirthError == null &&
+                                            provider.bloodGroupError == null &&
+                                            provider.sexError == null &&
+                                            provider.heightError == null &&
+                                            provider.ethnicityError == null &&
+                                            provider.eyeColourError == null) {
+                                        }else{
+                                          submitData(provider);
+                                        }
+                                      }
+                                    }
 
 
                                   },
@@ -500,4 +499,3 @@ class _FormScreenState extends State<FormScreen> {
 
 
 }
-
