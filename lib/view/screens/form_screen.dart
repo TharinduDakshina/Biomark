@@ -21,191 +21,193 @@ class _FormScreenState extends State<FormScreen> {
     // double screenHeight = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
       create: (_) => VolunteerProvider(),
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: AppTheme.colors.secondary,
-          shadowColor: AppTheme.colors.secondary,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back_ios_new,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: AppTheme.colors.secondary,
+            shadowColor: AppTheme.colors.secondary,
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: AppTheme.colors.primary,
+                )),
+            title: Text(
+              'Biomark volunteer',
+              style: TextStyle(
                 color: AppTheme.colors.primary,
-              )),
-          title: Text(
-            'Biomark volunteer',
-            style: TextStyle(
-              color: AppTheme.colors.primary,
-              fontFamily: "Poppins",
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
+                fontFamily: "Poppins",
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        body: Consumer<VolunteerProvider>(
-          builder: (context, provider, child) {
-            return Container(
-              width: screenWidth,
-              decoration: BoxDecoration(color: AppTheme.colors.secondary),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: SizedBox(
-                          width: screenWidth,
-                          child: ReadMoreText(
-                            "We are collecting personal data from volunteers to build advanced predictive machine learning models. The information provided will help us personalize digital services and improve their efficiency in the future. By participating, you contribute to innovations that could lead to significant benefits in various digital domains. Your identity will remain confidential, and as a volunteer, you will be recognized with special benefits through a 'Participator Account' (PAC), ensuring that your contribution is acknowledged in the future advancements of our services.  ",
-                            trimLines: 3,
-                            textAlign: TextAlign.justify,
-                            trimMode: TrimMode.Line,
-                            trimCollapsedText: "Read more",
-                            trimExpandedText: "Read less",
-                            lessStyle: TextStyle(
-                                color: AppTheme.colors.primary,
-                                fontWeight: FontWeight.bold),
-                            moreStyle: TextStyle(
-                                color: AppTheme.colors.primary,
-                                fontWeight: FontWeight.bold),
-                            style: TextStyle(
-                              color: AppTheme.colors.blue,
+          body: Consumer<VolunteerProvider>(
+            builder: (context, provider, child) {
+              return Container(
+                width: screenWidth,
+                decoration: BoxDecoration(color: AppTheme.colors.secondary),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: SizedBox(
+                            width: screenWidth,
+                            child: ReadMoreText(
+                              "We are collecting personal data from volunteers to build advanced predictive machine learning models. The information provided will help us personalize digital services and improve their efficiency in the future. By participating, you contribute to innovations that could lead to significant benefits in various digital domains. Your identity will remain confidential, and as a volunteer, you will be recognized with special benefits through a 'Participator Account' (PAC), ensuring that your contribution is acknowledged in the future advancements of our services.  ",
+                              trimLines: 3,
+                              textAlign: TextAlign.justify,
+                              trimMode: TrimMode.Line,
+                              trimCollapsedText: "Read more",
+                              trimExpandedText: "Read less",
+                              lessStyle: TextStyle(
+                                  color: AppTheme.colors.primary,
+                                  fontWeight: FontWeight.bold),
+                              moreStyle: TextStyle(
+                                  color: AppTheme.colors.primary,
+                                  fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                color: AppTheme.colors.blue,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                _buildTextFormField(
-                                  labelText: 'Date of Birth',
-                                  errorText: provider.dobError,
-                                  onChanged: provider.updateDob,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Time of Birth',
-                                  errorText: provider.timeOfBirthError,
-                                  onChanged: provider.updateTimeOfBirth,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Location of Birth',
-                                  errorText: provider.locationOfBirthError,
-                                  onChanged: provider.updateLocationOfBirth,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Blood Group',
-                                  errorText: provider.bloodGroupError,
-                                  onChanged: provider.updateBloodGroup,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Sex',
-                                  errorText: provider.sexError,
-                                  onChanged: provider.updateSex,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Height',
-                                  errorText: provider.heightError,
-                                  onChanged: provider.updateHeight,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Ethnicity',
-                                  errorText: provider.ethnicityError,
-                                  onChanged: provider.updateEthnicity,
-                                  provider: provider,
-                                ),
-                                const SizedBox(height: 16),
-                                _buildTextFormField(
-                                  labelText: 'Eye Colour',
-                                  errorText: provider.eyeColourError,
-                                  onChanged: provider.updateEyeColour,
-                                  provider: provider,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topCenter,
-                                      height: 40,
-                                      child: Text(
-                                        "Note: ",
-                                        style: TextStyle(
-                                            color: AppTheme.colors.red),
-                                      ),
-                                    ),
-                                    Expanded(
-                                        child: Container(
-                                      alignment: Alignment.topCenter,
-                                      height: 40,
-                                      child: Text(
-                                        "You can unsubscribe from this service any anytime. ",
-                                        style: TextStyle(
-                                            color: AppTheme.colors.red
-                                                .withOpacity(0.7)),
-                                      ),
-                                    ))
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    provider.validateFields();
-                                    if (_formKey.currentState!.validate()) {
-                                      if (provider.dobError == null &&
-                                          provider.timeOfBirthError == null &&
-                                          provider.locationOfBirthError ==
-                                              null &&
-                                          provider.bloodGroupError == null &&
-                                          provider.sexError == null &&
-                                          provider.heightError == null &&
-                                          provider.ethnicityError == null &&
-                                          provider.eyeColourError == null) {
-                                        submitData(provider);
-                                      }
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 0,
-                                    foregroundColor: AppTheme.colors.secondary,
-                                    backgroundColor: AppTheme.colors.primary,
-                                    textStyle: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  _buildTextFormField(
+                                    labelText: 'Date of Birth',
+                                    errorText: provider.dobError,
+                                    onChanged: provider.updateDob,
+                                    provider: provider,
                                   ),
-                                  child: const Text('Submit'),
-                                ),
-                              ],
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Time of Birth',
+                                    errorText: provider.timeOfBirthError,
+                                    onChanged: provider.updateTimeOfBirth,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Location of Birth',
+                                    errorText: provider.locationOfBirthError,
+                                    onChanged: provider.updateLocationOfBirth,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Blood Group',
+                                    errorText: provider.bloodGroupError,
+                                    onChanged: provider.updateBloodGroup,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Sex',
+                                    errorText: provider.sexError,
+                                    onChanged: provider.updateSex,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Height',
+                                    errorText: provider.heightError,
+                                    onChanged: provider.updateHeight,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Ethnicity',
+                                    errorText: provider.ethnicityError,
+                                    onChanged: provider.updateEthnicity,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _buildTextFormField(
+                                    labelText: 'Eye Colour',
+                                    errorText: provider.eyeColourError,
+                                    onChanged: provider.updateEyeColour,
+                                    provider: provider,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.topCenter,
+                                        height: 40,
+                                        child: Text(
+                                          "Note: ",
+                                          style: TextStyle(
+                                              color: AppTheme.colors.red),
+                                        ),
+                                      ),
+                                      Expanded(
+                                          child: Container(
+                                            alignment: Alignment.topCenter,
+                                            height: 40,
+
+                                            child: Text(
+                                          "You can unsubscribe from this service any anytime. ",
+                                          style: TextStyle(
+                                              color: AppTheme.colors.red
+                                                  .withOpacity(0.7)),
+                                        ),
+                                      ))
+                                    ],
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      provider.validateFields();
+                                      if (_formKey.currentState!.validate()) {
+                                        if (provider.dobError == null &&
+                                            provider.timeOfBirthError == null &&
+                                            provider.locationOfBirthError ==
+                                                null &&
+                                            provider.bloodGroupError == null &&
+                                            provider.sexError == null &&
+                                            provider.heightError == null &&
+                                            provider.ethnicityError == null &&
+                                            provider.eyeColourError == null) {
+                                          submitData(provider);
+                                        }
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      elevation: 0,
+                                      foregroundColor: AppTheme.colors.secondary,
+                                      backgroundColor: AppTheme.colors.primary,
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: AppTheme.colors.secondary),
+                                    ),
+                                    child: const Text('Subscribe'),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

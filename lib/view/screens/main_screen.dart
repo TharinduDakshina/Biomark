@@ -1,4 +1,3 @@
-import 'package:biomark/view/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
@@ -50,14 +49,34 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(5.0),
+            Padding(
+              padding: const EdgeInsets.all(5.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SignUpButton(
-                    routePath: '/signupscreen',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/signupscreen');
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: screenWidth * 0.8,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: AppTheme.colors.primary,
+                        border: Border.all(
+                            color: AppTheme.colors.secondary, width: 1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            color: AppTheme.colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
+                    ),
                   )
                 ],
               ),

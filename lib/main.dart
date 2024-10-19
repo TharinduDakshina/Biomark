@@ -7,8 +7,10 @@ import 'package:biomark/view/providers/web_view_provider.dart';
 import 'package:biomark/view/screens/form_screen.dart';
 import 'package:biomark/view/screens/home_screen.dart';
 import 'package:biomark/view/screens/main_screen.dart';
+import 'package:biomark/view/screens/personal_details_screen.dart';
 import 'package:biomark/view/screens/recovery_screen_1.dart';
 import 'package:biomark/view/screens/recovery_screen_2.dart';
+import 'package:biomark/view/screens/security_details_screen.dart';
 import 'package:biomark/view/screens/sign_in_screen.dart';
 import 'package:biomark/view/screens/sign_up_screen.dart';
 import 'package:biomark/view/screens/splash_screen.dart';
@@ -34,7 +36,6 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => WebViewProvider()),
       ChangeNotifierProvider(create: (_) => VolunteerProvider())
     ],
-
     child: const MyApp(),
   ));
 }
@@ -70,6 +71,8 @@ class MyApp extends StatelessWidget {
         '/recoveryscreen2': (context) => const RecoveryScreen2(),
         '/homescreen': (context) => const HomeScreen(),
         '/formscreen': (context) => const FormScreen(),
+        '/securityscreen': (context) => const SecurityDetailsScreen(),
+        '/personalscreen': (context) => const PersonalDetailsScreen(),
       },
 
     );

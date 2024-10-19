@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewProvider with ChangeNotifier {
+class WebViewProvider extends ChangeNotifier {
   late WebViewController _controller;
 
   WebViewProvider() {
@@ -13,6 +13,15 @@ class WebViewProvider with ChangeNotifier {
   void _initializeController() {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://www.biomarking.com/"));
+      ..loadRequest(Uri.parse("https://www.biomarking."));
+  }
+
+  void reloadWebView() {
+    _controller.loadRequest(Uri.parse("https://www.biomarking."));
+  }
+
+  void resetController() {
+    _initializeController();
+    notifyListeners(); // Notify listeners that the controller has been reset
   }
 }

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
 class SignUpButton extends StatelessWidget {
-  final String routePath;
-  const SignUpButton({super.key, required this.routePath});
+  final VoidCallback onPressed;
+  const SignUpButton({super.key, required this.onPressed,});
 
   @override
   Widget build(BuildContext context) {
+
     // double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, routePath);
+        onPressed();
       },
       child: Container(
         alignment: Alignment.center,

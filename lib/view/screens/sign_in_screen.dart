@@ -3,6 +3,7 @@ import 'package:biomark/view/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:biomark/auth/auth_service.dart';
+import '../providers/web_view_provider.dart';
 import '../theme/app_theme.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -22,6 +23,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (email.isEmpty && password.isEmpty) {
       if (mounted) {
+        final webViewProvider =
+            Provider.of<WebViewProvider>(context, listen: false);
+        webViewProvider.resetController();
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text("Email and password cannot be empty"),
@@ -68,17 +73,22 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     AuthService authService = AuthService();
-    AuthResponse response = await authService.signInWithEmailAndPassword(email, password);
+    AuthResponse response =
+        await authService.signInWithEmailAndPassword(email, password);
 
     if (response.userCredential != null) {
       if (mounted) {
+        final webViewProvider =
+            Provider.of<WebViewProvider>(context, listen: false);
+        webViewProvider.resetController();
         Navigator.pushNamed(context, '/homescreen');
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(response.errorMessage ?? "Sign in failed. Please try again."),
+            content: Text(
+                response.errorMessage ?? "Sign in failed. Please try again."),
             backgroundColor: AppTheme.colors.red,
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -90,7 +100,6 @@ class _SignInScreenState extends State<SignInScreen> {
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
