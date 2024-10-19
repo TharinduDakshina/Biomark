@@ -1,11 +1,13 @@
 import 'package:biomark/model/UserInformantionModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
+
+import '../view/Util/ToastMassage.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-Future<bool> saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
-    String bloodGroup,String sex,String height,String ethnicity,String eyeColour) async {
+void saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
+    String bloodGroup,String sex,String height,String ethnicity,String eyeColour, String userId,String state, BuildContext context2) async {
 
 
   UserInformationModel useInfer=UserInformationModel(
@@ -21,6 +23,7 @@ Future<bool> saveUserData(String dateOfBirth,String timeOfBirth,String locationO
 
   Map<String, String?> infoMap() {
     return {
+      'userId':userId,
       'dateOfBirth': useInfer.dateOfBirth,
       'timeOfBirth': useInfer.timeOfBirth,
       'locationOfBirth': useInfer.locationOfBirth,
@@ -29,17 +32,38 @@ Future<bool> saveUserData(String dateOfBirth,String timeOfBirth,String locationO
       'height': useInfer.height,
       'ethnicity': useInfer.ethnicity,
       'eyeColour': useInfer.eyeColour,
+      'state': "Subscribe",
     };
   }
 
+  try{
 
+    if(state!="Unsubscribe"){
 
-  await _firestore.collection("userInfo").add(infoMap()).then((value) {
-    print("User Added");
-  return true;
-  }).catchError((error) {
-    print("Failed to add user: $error");
-    return false;
-  });
-return false;
+      await _firestore.collection("userInfo").add(infoMap()).then((value) {
+        print("User Added");
+        showToast('Saved Information.');
+        Navigator.pop(context2);
+      }).catchError((error) {
+        print("Failed to add user: $error");
+        showToast('Saved failed,Try again.');
+      });
+    }else{
+      QuerySnapshot querySnapshot = await _firestore.collection('userInfo')
+          .where("userId", isEqualTo: userId)
+          .get();
+
+      for (var doc in querySnapshot.docs) {
+        await _firestore.collection('userInfo')
+            .doc(doc.id)
+            .update(infoMap());
+      }
+      showToast('Saved Information.');
+      Navigator.pop(context2);
+    }
+
+  }catch(e){
+    showToast("$e");
+  }
+
 }
