@@ -13,6 +13,6 @@ class WebViewProvider with ChangeNotifier {
   void _initializeController() {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://www.biomarking."));
+      ..loadRequest(Uri.parse("https://www.biomarking.com/"));
   }
 }

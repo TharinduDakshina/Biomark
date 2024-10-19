@@ -2,6 +2,7 @@ import 'package:biomark/view/providers/password_visibility_provider.dart';
 import 'package:biomark/view/widgets/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:biomark/auth/auth_service.dart';
 import '../theme/app_theme.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -12,7 +13,85 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  // final passwordVisibilityProvider = Provider.of<PasswordVisibilityProvider>(context);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _signIn() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty && password.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text("Email and password cannot be empty"),
+            backgroundColor: AppTheme.colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+      return;
+    } else if (email.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text("E-mail cannot be empty"),
+            backgroundColor: AppTheme.colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+      return;
+    } else if (password.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text("Password cannot be empty"),
+            backgroundColor: AppTheme.colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+      return;
+    }
+
+    AuthService authService = AuthService();
+    AuthResponse response = await authService.signInWithEmailAndPassword(email, password);
+
+    if (response.userCredential != null) {
+      if (mounted) {
+        Navigator.pushNamed(context, '/homescreen');
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.errorMessage ?? "Sign in failed. Please try again."),
+            backgroundColor: AppTheme.colors.red,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -68,6 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           TextFormField(
+                            controller: _emailController,
                             validator: (value) {
                               if (value!.isEmpty ||
                                   !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
@@ -119,13 +199,17 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
                           ),
-                          Consumer<PasswordVisibilityProvider>(builder: (context, passwordVisibilityProvider, child){
+                          Consumer<PasswordVisibilityProvider>(builder:
+                              (context, passwordVisibilityProvider, child) {
                             return TextFormField(
-                              obscureText: passwordVisibilityProvider.visibility,
+                              controller: _passwordController,
+                              obscureText:
+                                  passwordVisibilityProvider.visibility,
                               decoration: InputDecoration(
                                   hintText: 'password',
                                   hintStyle: TextStyle(
-                                    color: AppTheme.colors.primary.withOpacity(0.5),
+                                    color: AppTheme.colors.primary
+                                        .withOpacity(0.5),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(12.0),
@@ -148,26 +232,30 @@ class _SignInScreenState extends State<SignInScreen> {
                                       width: 1,
                                     ),
                                   ),
-                                  suffixIcon: IconButton(onPressed: (){
-                                    passwordVisibilityProvider.toggleVisibility();
-                                  }, icon: Icon(
-                                      passwordVisibilityProvider.visibility
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                    color: AppTheme.colors.primary.withOpacity(0.5),
-                                  ))
-                              ),
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        passwordVisibilityProvider
+                                            .toggleVisibility();
+                                      },
+                                      icon: Icon(
+                                        passwordVisibilityProvider.visibility
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: AppTheme.colors.primary
+                                            .withOpacity(0.5),
+                                      ))),
                             );
                           }),
-      
                           Padding(
-                            padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
+                            padding:
+                                const EdgeInsets.only(top: 5.0, bottom: 5.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/recoveryscreen1');
+                                    Navigator.pushNamed(
+                                        context, '/recoveryscreen1');
                                   },
                                   child: Text(
                                     "Lost account?",
@@ -181,9 +269,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           SignInButton(
-                              routePath: '/homescreen',
-                              buttonColor: AppTheme.colors.primary,
-                              textColor: AppTheme.colors.secondary),
+                            buttonColor: AppTheme.colors.primary,
+                            textColor: AppTheme.colors.secondary,
+                            onPressed: _signIn,
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0),
                             child: Row(
@@ -191,11 +280,13 @@ class _SignInScreenState extends State<SignInScreen> {
                               children: [
                                 Text(
                                   "Don't have an account? ",
-                                  style: TextStyle(color: AppTheme.colors.primary),
+                                  style:
+                                      TextStyle(color: AppTheme.colors.primary),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
-                                    Navigator.pushNamed(context, '/signupscreen');
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/signupscreen');
                                   },
                                   child: Text(
                                     "Sign Up",
