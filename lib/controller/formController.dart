@@ -6,7 +6,7 @@ import '../view/Util/ToastMassage.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 void saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
-    String bloodGroup,String sex,String height,String ethnicity,String eyeColour) async {
+    String bloodGroup,String sex,String height,String ethnicity,String eyeColour, String userId) async {
 
 
   UserInformationModel useInfer=UserInformationModel(
@@ -22,6 +22,7 @@ void saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
 
   Map<String, String?> infoMap() {
     return {
+      'userId':userId,
       'dateOfBirth': useInfer.dateOfBirth,
       'timeOfBirth': useInfer.timeOfBirth,
       'locationOfBirth': useInfer.locationOfBirth,

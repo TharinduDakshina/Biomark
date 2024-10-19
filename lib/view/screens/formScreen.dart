@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:biomark/view/providers/birthday_provider.dart';
 
-import '../Util/ToastMassage.dart';
 
 
 
@@ -187,8 +186,6 @@ class _FormScreenState extends State<FormScreen> {
                           _ethnicityError == null &&
                           _eyeColourError == null) {
                          submitData();
-                      }else {
-                        // submitData();
                       }
                     }
                   },
@@ -252,16 +249,16 @@ class _FormScreenState extends State<FormScreen> {
   void submitData() {
     if (kDebugMode) {
 
-       saveUserData(
-          _dobController.text.trim(),
-          _timeOfBirthController.text.trim(),
-          _locationOfBirthController.text.trim(),
-          _bloodGroupController.text.trim(),
-          _sexController.text.trim(),
-          _heightController.text.trim(),
-          _ethnicityController.text.trim(),
-          _eyeColourController.text.trim()
-      );
+      //  saveUserData(
+      //     _dobController.text.trim(),
+      //     _timeOfBirthController.text.trim(),
+      //     _locationOfBirthController.text.trim(),
+      //     _bloodGroupController.text.trim(),
+      //     _sexController.text.trim(),
+      //     _heightController.text.trim(),
+      //     _ethnicityController.text.trim(),
+      //     _eyeColourController.text.trim()
+      // );
 
 
 

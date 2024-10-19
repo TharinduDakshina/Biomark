@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 void showToast(String message) {
   Fluttertoast.showToast(
     msg: message,
-    toastLength: Toast.LENGTH_SHORT, // Toast duration: LENGTH_SHORT or LENGTH_LONG
+    toastLength: Toast.LENGTH_LONG, // Toast duration: LENGTH_SHORT or LENGTH_LONG
     gravity: ToastGravity.BOTTOM, // Toast position: TOP, BOTTOM, CENTER
     timeInSecForIosWeb: 1, // For iOS
     backgroundColor: Colors.black54, // Toast background color
