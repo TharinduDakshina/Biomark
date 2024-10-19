@@ -1,10 +1,11 @@
 import 'package:biomark/model/UserInformantionModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
+
+import '../view/Util/ToastMassage.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-Future<bool> saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
+void saveUserData(String dateOfBirth,String timeOfBirth,String locationOfBirth,
     String bloodGroup,String sex,String height,String ethnicity,String eyeColour) async {
 
 
@@ -36,10 +37,9 @@ Future<bool> saveUserData(String dateOfBirth,String timeOfBirth,String locationO
 
   await _firestore.collection("userInfo").add(infoMap()).then((value) {
     print("User Added");
-  return true;
+    showToast('Saved Information.');
   }).catchError((error) {
     print("Failed to add user: $error");
-    return false;
+    showToast('Saved failed,Try again.');
   });
-return false;
 }

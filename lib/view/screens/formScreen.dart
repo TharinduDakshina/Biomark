@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:biomark/view/providers/birthday_provider.dart';
 
+import '../Util/ToastMassage.dart';
+
 
 
 class FormScreen extends StatefulWidget {
@@ -221,7 +223,7 @@ class _FormScreenState extends State<FormScreen> {
   }
 
   void _validateFields() {
-    setState(() {
+   setState(() {
       // Set error messages based on field content
       _dobError = _dobController.text.isEmpty ? 'Please enter your date of birth' : null;
       _timeOfBirthError = _timeOfBirthController.text.isEmpty ? 'Please enter your time of birth' : null;
@@ -260,6 +262,7 @@ class _FormScreenState extends State<FormScreen> {
           _ethnicityController.text.trim(),
           _eyeColourController.text.trim()
       );
+
 
 
       print('Date of Birth: ${_dobController.text.trim()}');
