@@ -1,4 +1,4 @@
-import 'package:biomark/widgets/sign_up_button.dart';
+import 'package:biomark/view/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
