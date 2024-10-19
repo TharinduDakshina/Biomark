@@ -2,8 +2,9 @@ import 'package:biomark/view/providers/birthday_provider.dart';
 import 'package:biomark/view/providers/password_email_provider.dart';
 import 'package:biomark/view/providers/password_visibility_provider.dart';
 import 'package:biomark/view/providers/splash_screen_provider.dart';
+import 'package:biomark/view/providers/volunteer_provider.dart';
 import 'package:biomark/view/providers/web_view_provider.dart';
-import 'package:biomark/view/screens/formScreen.dart';
+import 'package:biomark/view/screens/form_screen.dart';
 import 'package:biomark/view/screens/home_screen.dart';
 import 'package:biomark/view/screens/main_screen.dart';
 import 'package:biomark/view/screens/recovery_screen_1.dart';
@@ -15,7 +16,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -31,7 +31,8 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
       ChangeNotifierProvider(create: (_) => BirthdayProvider()),
       ChangeNotifierProvider(create: (_) => PasswordEmailProvider()),
-      ChangeNotifierProvider(create: (_) => WebViewProvider())
+      ChangeNotifierProvider(create: (_) => WebViewProvider()),
+      ChangeNotifierProvider(create: (_) => VolunteerProvider())
     ],
 
     child: const MyApp(),
@@ -41,7 +42,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

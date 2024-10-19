@@ -1,4 +1,3 @@
-import 'package:biomark/view/widgets/sign_in_button.dart';
 import 'package:biomark/view/widgets/sign_up_button.dart';
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
@@ -27,19 +26,28 @@ class MainScreen extends StatelessWidget {
                       style: TextStyle(
                           color: AppTheme.colors.secondary,
                           fontSize: 30,
-                          fontWeight: FontWeight.bold
-                      ))
+                          fontWeight: FontWeight.bold))
                 ],
               ),
             ),
-             Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SignInButton(routePath: '/signinscreen', buttonColor: AppTheme.colors.secondary, textColor: AppTheme.colors.primary,)
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/signinscreen');
+              },
+              child: Container(
+                alignment: Alignment.center,
+                width: screenWidth * 0.8,
+                height: 50,
+                decoration: BoxDecoration(
+                    color: AppTheme.colors.secondary,
+                    borderRadius: BorderRadius.circular(12)),
+                child: Text(
+                  "Sign In",
+                  style: TextStyle(
+                      color: AppTheme.colors.primary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
               ),
             ),
             const Padding(
@@ -48,7 +56,9 @@ class MainScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SignUpButton(routePath: '/signupscreen',)
+                  SignUpButton(
+                    routePath: '/signupscreen',
+                  )
                 ],
               ),
             )
