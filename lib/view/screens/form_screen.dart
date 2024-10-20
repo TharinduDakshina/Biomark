@@ -30,10 +30,10 @@ class _FormScreenState extends State<FormScreen> {
   String? _ethnicityError;
   String? _eyeColourError;
   User? _user;
-  late bool isDataSaved;
+  late bool isDataSaved=false;
   var userData;
   String buttonName="Submit";
-  late String state;
+  late String state="null";
   late BuildContext context2;
 
   final _formKey = GlobalKey<FormState>();
@@ -74,7 +74,7 @@ class _FormScreenState extends State<FormScreen> {
       if(isDataSaved){
         setState(() {
           state=userData['state'];
-          if(state!="Unsubscribe"){
+          if(state!="Unsubscribe" && state!="null"){
             buttonName="UnSubscribe";
             _dobController.text = userData['dateOfBirth'] ?? '';
             _timeOfBirthController.text=userData['timeOfBirth'] ?? '';
@@ -293,7 +293,7 @@ class _FormScreenState extends State<FormScreen> {
                                 const SizedBox(height: 8),
                                 ElevatedButton(
                                   onPressed: () async {
-                                    if(isDataSaved && state!="Unsubscribe"){
+                                    if(isDataSaved && state!="Unsubscribe" && state!="null"){
                                       try{
                                         Map<String, String?> newData() {
                                           return {
