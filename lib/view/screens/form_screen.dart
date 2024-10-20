@@ -440,7 +440,7 @@ class _FormScreenState extends State<FormScreen> {
     final timePattern =RegExp(r'^(?:[01]\d|2[0-3]):[0-5]\d$');
     final bloodGroupPattern=RegExp(r'^(A|B|AB|O)[+-]$');
     final genderPattern =RegExp(r'^(male|female|M|F|non-binary|genderqueer|genderfluid|transgender|agender|other)$', caseSensitive: false);
-    final heightPattern = RegExp(r'^(1[5-9][0-9]|[1-9]?[0-9]|[4-7]"[0-9]|[0-9]")$');
+    final heightPattern = RegExp(r'^([5-9][0-9]|1[0-9]{2}|2[0-9]{2}|300)\s?cm$');
     final eyeColorPattern = RegExp(r'^(blue|brown|green|hazel|gray|amber|violet)$', caseSensitive: false);
 
     switch (dobController) {
@@ -479,7 +479,7 @@ class _FormScreenState extends State<FormScreen> {
         if(value.isNotEmpty && heightPattern.hasMatch(value)){
           _heightError=null;
         }else{
-          _heightError = '(E.G., 170cm, 180cm, 5\'10",4\'10")';
+          _heightError = '150cm 120cm (without space before cm and 50cm-300cm)';
         }
         break;
       case '_ethnicityController':
@@ -489,7 +489,7 @@ class _FormScreenState extends State<FormScreen> {
         if(value.isNotEmpty && eyeColorPattern.hasMatch(value)){
           _eyeColourError=null;
         }else{
-          _eyeColourError =  'Eye color types are "blue," "brown," "green," "hazel," "gray," and "amber"';
+          _eyeColourError =  'Eye color types are "blue," "brown," "hazel," "gray," and "amber"';
         }
         break;
       default:
