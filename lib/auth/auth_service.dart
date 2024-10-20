@@ -10,14 +10,14 @@ class AuthResponse {
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<AuthResponse> signInWithEmailAndPassword(String email, String password) async {
+  Future<AuthResponse> signInWithEmailAndPassword(
+      String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
       return AuthResponse(userCredential: userCredential);
-
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       if (e.code == 'user-not-found') {
@@ -31,9 +31,11 @@ class AuthService {
     }
   }
 
-  Future<AuthResponse> registerWithEmailAndPassword(String email, String password) async {
+  Future<AuthResponse> registerWithEmailAndPassword(
+      String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
@@ -60,4 +62,7 @@ class AuthService {
   }
 
   Stream<User?> get authStateChanges => _auth.authStateChanges();
+
+  static validateRecoveryInfo(String fullName, dateOfBirth,
+      String motherMaidenName, String cityGrewUp) async {}
 }

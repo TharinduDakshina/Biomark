@@ -3,15 +3,18 @@ import '../theme/app_theme.dart';
 
 class SignUpButton extends StatelessWidget {
   final VoidCallback onPressed;
-  const SignUpButton({super.key, required this.onPressed,});
+
+  const SignUpButton({
+    super.key,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     // double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         onPressed();
       },
       child: Container(
@@ -20,10 +23,7 @@ class SignUpButton extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(
           color: AppTheme.colors.primary,
-          border: Border.all(
-              color: AppTheme.colors.secondary,
-              width: 1
-          ),
+          border: Border.all(color: AppTheme.colors.secondary, width: 1),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(

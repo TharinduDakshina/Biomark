@@ -13,15 +13,15 @@ class WebViewProvider extends ChangeNotifier {
   void _initializeController() {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse("https://www.biomarking."));
+      ..loadRequest(Uri.parse("https://www.biomarking.com/"));
   }
 
   void reloadWebView() {
-    _controller.loadRequest(Uri.parse("https://www.biomarking."));
+    _controller.loadRequest(Uri.parse("https://www.biomarking.com/"));
   }
 
   void resetController() {
     _initializeController();
-    notifyListeners(); // Notify listeners that the controller has been reset
+    notifyListeners();
   }
 }

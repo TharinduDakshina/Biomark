@@ -38,10 +38,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String password = _passwordController.text.trim();
     String confirmPassword = _confirmPasswordController.text.trim();
 
-    // Check if form is valid and if all fields are filled
     if (_formKey.currentState!.validate()) {
       if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty || fullName.isEmpty || mothersMaidenName.isEmpty || bestFriendName.isEmpty || petName.isEmpty || cityGrewUp.isEmpty || dateOfBirth == null) {
-        // Show an error if any field is empty
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('All fields are required.'),
@@ -56,7 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         return;
       }
 
-      // Check if passwords match
       if (password != confirmPassword) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -73,23 +71,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       try {
-        // Proceed with user registration
         UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
 
-        // Store additional user information in Firestore
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'email': email,
           'fullName': fullName,
-          'dateOfBirth': dateOfBirth, // Convert DateTime to String
+          'dateOfBirth': dateOfBirth,
           'mothersMaidenName': mothersMaidenName,
           'bestFriendName': bestFriendName,
           'petName': petName,
           'cityGrewUp': cityGrewUp,
         });
 
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Registration successful!'),
