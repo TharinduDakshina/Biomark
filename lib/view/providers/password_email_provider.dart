@@ -12,7 +12,6 @@ class PasswordEmailProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   String? get lengthError => _lengthError;
   String? get emailError => _emailError;
-
   String? get userEmail => _userEmail;
 
   set email(String value) {

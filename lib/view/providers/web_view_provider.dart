@@ -22,6 +22,6 @@ class WebViewProvider extends ChangeNotifier {
 
   void resetController() {
     _initializeController();
-    notifyListeners(); // Notify listeners that the controller has been reset
+    notifyListeners();
   }
 }
